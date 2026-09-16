@@ -36,11 +36,40 @@
 
 ---
 
-## Pitfall 3: [nama pitfall] — ditulis oleh [nama]
+## Pitfall 3: The network is reliable — ditulis oleh Yoga Perkasa Didik
 
-(ulangi struktur di atas)
+**Bukti di skenario:** 
 
----
+1. Saat trafik naik, satu server yang menangani semua modul (pesanan, pembayaran, notifikasi kurir) kewalahan karena semuanya berjalan di satu proses monolitik yang sama.
+
+2. Tim menemukan bahwa kode mereka menulis asumsi seperti # network is always reliable, no need for retry dan tidak ada timeout sama sekali pada pemanggilan antar service (modul pesanan memanggil modul pembayaran dan menunggu tanpa batas waktu).
+
+**Kenapa ini keliru:** 
+
+Pada kutipan pertama, semua proses seperti pesanan, pembayaran, dan notifikasi kurir di handle oleh satu server (monolitik) yang sama. Dampaknya adalah, ketika terjadi lonjakan trafik, server akan mengalami kewalahan karena resource CPU dan memory yang harus di bagi untuk menghandle tiga proses tersebut, yang kemungkinan akan menyebabkan sistem menjadi lambat atau munkin RTO (Request Time Out).
+
+Untuk kutpan kedua, walaupun beberapa kata sangan cocok dengan point "The network is reliable", saya menyimpulkan jika pesan "network is always reliable, no need for retry", menunjukan bagaimana tim developer tidak memikirkan skenario yang terjadi pada traffic tinggi saat banyak proses datang. Tentunya biaya dari setiap proses tidaklah murah dan kurang cocok untuk sistem yang monolitik, kecuali jika tim developer sudah melakukan optimasi, scaling, atau perhitungan cost.
+
+**Dampak ke FoodGo:** 
+
+Dampak yang paling terasa dapat dilihat dari beberapa kata seperti 
+1. Aplikasi jadi sangat lambat, beberapa permintaan timeout.
+2. Server backend kadang crash total dan perlu di-restart manual.
+
+Karena semua proses berjalan dalam sistem monolitik, maka ketika sistem mengalami lonjakan trafik, server akan mengalami kewalahan karena resource CPU dan memory yang harus di bagi untuk menghandle tiga proses tersebut, yang kemungkinan akan menyebabkan sistem menjadi lambat atau munkin RTO (Request Time Out). Selain itu, ketika sistem mengalami kegagalan, sistem akan mengalami crash total.
+
+**Solusi desain awal:** 
+
+Solusi sendiri sebenernya cukup beragam, tergantung dari budget yang ada di FoodGo. Kalau dari saya, hal paling pertama yang bisa diperbaiki adalah Topologi dari sistem FoodGo itu sendiri. Kalau dilihat dari kutuipan yang saya cantumkan, saya beranggapan jika sistem monolitik FoodGo, lebih tepatnya spek server, masih belum memumpuni untuk menampung lonjakan trafik dari tiga proses. Jadi, saran yang bisa saya beri adalah antara melakukan scaling baik vertical scaling (meningkatkan spesifikasi server) atau Horizontal Scaling (menambah jumlah server).
+
+ Pastinya yang lebih murah dikit menggunakan vertical scalling, maka FoodGo dapat meningkatkan spesifikasi server yang saat ini digunakan, seperti menambah kapasitas RAM, CPU, atau resource lainnya. Dengan begitu, satu server yang menangani proses pesanan, pembayaran, dan notifikasi dapat memiliki kapasitas yang lebih besar untuk menangani lonjakan trafik. Pendekatan ini relatif lebih sederhana karena tidak perlu mengubah arsitektur sistem secara besar-besaran, tetapi tetap memiliki batas karena kemampuan peningkatan spesifikasi pada satu server juga terbatas.
+
+
+**Trade-off:**
+
+Keunggulan yang didapat adalah pemrosesan request yang menjadi lebih cepat dibandingkan sebelumnya.
+
+Namun untuk resiko, tentunya biaya untuk melakukan upgrade baik horizontal maupun vertical tidaklah murah. Kalaupun pihak tim lebih memilih vertical scalling dan masih menggunakan monolitik, masih belum ada jaminan jika masalah lonjakan traffic dapat diselesaikan.
 
 ## Kesimpulan Kelompok
 
