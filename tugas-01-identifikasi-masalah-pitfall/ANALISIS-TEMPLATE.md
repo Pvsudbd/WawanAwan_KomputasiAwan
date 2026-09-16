@@ -1,11 +1,11 @@
 # Tugas 1 — Analisis Pitfall FoodGo
 
-**Kelompok:** [nama kelompok]
+**Kelompok:** Wawan Awan
 
 | Nama | NIM | Kontribusi |
 |---|---|---|
 | Valen Jonathan Micelino Pasaribu | 10307240072 | Latency Zero |
-| Muhammad Kafi Rijal | 10307240016 | [pitfall/bagian yang dikerjakan] |
+| Muhammad Kafi Rijal | 10307240016 | Single Point of Failure |
 | Yoga Perkasa Didik | 103072400106 | [pitfall/bagian yang dikerjakan] |
 
 ## Pitfall 1: Latency Zero — ditulis oleh Valen Jonathan Micelino Pasaribu
@@ -22,9 +22,17 @@
 
 ---
 
-## Pitfall 2: Latency Zero — ditulis oleh Valen
+## Pitfall 2: Single Point of Failure — ditulis oleh Muhammad Kafi Rijal
 
-(ulangi struktur di atas)
+**Bukti di skenario:** Saat trafik naik, satu server yang menangani semua modul (pesanan, pembayaran, notifikasi kurir) kewalahan karena semuanya berjalan di satu proses monolitik yang sama.
+
+**Kenapa ini keliru:** Karena semua modul (pesanan, pembayaran, notigikasi kurir) di tangani oleh satu server dan dalam satu proses yang sama
+
+**Dampak ke FoodGo:** Ketika trafik sedang tinggi membuat proses menjadi sangat lambat dan ada beberapa permintaan yang timeout
+
+**Solusi desain awal:** Mengubah yang awalnya centralized menjadi distributed
+
+**Trade-off:** Biaya yang lebih besar
 
 ---
 
