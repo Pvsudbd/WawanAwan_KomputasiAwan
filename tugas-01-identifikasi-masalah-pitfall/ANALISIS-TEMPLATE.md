@@ -73,4 +73,4 @@ Namun untuk resiko, tentunya biaya untuk melakukan upgrade baik horizontal maupu
 
 ## Kesimpulan Kelompok
 
-[Ringkasan: jika FoodGo memperbaiki ketiga pitfall ini, apa arsitektur yang disarankan secara garis besar? Kaitkan dengan Tugas 2.]
+Pada Hasil diskusi kami menunjukan bahwa sistem yang dibuat sebelumnya masih sangat buruk untuk implementasikan. dan ditemukan 3 pitfall utama yakni zero latency, Single Point of Failure, dan Transport cost is zero. untuk zero latency adalah dengan antisipasi menggunakan mekanisme timeout, untuk Aingle Point of Failure dengan merubah server menjadi ditributed, dan untuk Transport cost is zero adalah dengan mengubah topology....
