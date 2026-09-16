@@ -16,7 +16,8 @@
 ## Review Silang
 - Valen mengomentari analisis Kafi: penjelasaan trade off kurang jelas karena hanya menyebut biaya yang besar, padahal masih ada hal lain yang perlu dipertimbangkan seperti pada saat maintenace.
 - (Yoga mengomentari analisis valen) : Dari penjelasan solusi valen mengenai kutipan yang di alami, penggunaan timout memang sudah cukup. Namun cara ini hanya akan lancar jika sudah menyelesaikan permasalahan permasalahan pemrosesan pada server yang masih monolitik dan terkesan under-spek untuk masalah yang dihadapi. Walau cara penambahan timout sudah dipasang, request-request yang gagal diproses oleh server ujung ujungnya juga timout.
-- 
+- Kafi mengomentari analisis yoga: saya kurang setuju mengenai bukti nomor 1 nya yoga dimana bukti itu kurang tepat jika di jadikan bukti untuk Transport cost is zero, dimana Transport cost is zero mengasumsikan bahwa memindahkan data atau mengirim antar node melalui jaringan itu gratis, sehingga bukti tersebut lebih sesuai untuk single point of failure
+  
 ## Log Penggunaan AI (Level 2)
 
 > Wajib diisi sesuai kebijakan Level 2 di [`../RUBRIK-UMUM.md`](../RUBRIK-UMUM.md). Tulis "Tidak memakai AI" pada baris pertama jika memang tidak dipakai. Hanya untuk brainstorming ide/outline — bukan untuk kode/analisis/teks akhir.
