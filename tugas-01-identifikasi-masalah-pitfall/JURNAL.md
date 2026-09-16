@@ -24,4 +24,5 @@
 
 | Tanggal | Tool AI | Prompt yang diberikan | Ringkasan saran/ide AI | Bagaimana diolah jadi tulisan/kode sendiri |
 |---|---|---|---|---|
-| ... | ... | ... | ... | ... |
+| 9/16/2026 | Chat GPT | (referensi: "the network is reliable", "latency is zero", "bandwidth is infinite", "the network is secure", "topology doesn't change", "there is one administrator", "transport cost is zero", "the network is homogeneous") jelasin satu satu | Penjelasan mengenai pengertian dari setiap pitfalls| Yang pasti dijadikan sebagai alat pemberi keputusan mengenai pitfalls apa yang cocok pada setiap kutipan |
+
