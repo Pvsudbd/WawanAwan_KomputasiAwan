@@ -2,10 +2,12 @@
 
 > Isi jurnal ini selama proses diskusi berlangsung, bukan ditulis ulang rapi di akhir. Tulis dengan gaya bebas — poin diskusi, kebuntuan, perubahan pikiran.
 
-## [Tanggal diskusi 1]
-- Peserta: [nama-nama yang hadir]
-- Poin diskusi: ...
-- Perbedaan pendapat (jika ada): ...
+## 9/16/2026
+- Peserta: 1. Muhammad Kafi Rijal (10307240016) 2. Valen Jhonatan Micelino Pasaribu (10307240072) 3. Yoga Perkasa Didik (103072400106)
+- Poin diskusi: Mengidentifikasi 3 jenis pitfall utama yang ada pada kutipan
+- Perbedaan pendapat (jika ada):
+
+  1. Kami sempat memiliki perbedaan pendapat mengenai kutipan ketiga yang berbunyi  "Tim menemukan bahwa kode mereka menulis asumsi seperti # network is always reliable, no need for retry dan tidak ada timeout sama sekali pada pemanggilan antar service (modul pesanan memanggil modul pembayaran dan menunggu tanpa batas waktu).", dimana pitfalls ini sangatlah mirip dengan tipe "The network is reliable" (Kafi) dan "Latency is zero" (Valen), namun kemudian satu anggota lagi (Yoga) mengemukakan jika kutipan tersebut cukup mirip dengan "Transport cost is zero" karena pesan tersebut mengindikasikan tim developer yang tidak memikirkan tentang skenario Traffic tinggi.
 
 ## [Tanggal diskusi 2]
 - ...
