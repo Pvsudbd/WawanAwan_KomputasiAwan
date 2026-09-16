@@ -4,7 +4,7 @@
 
 | Nama | NIM | Kontribusi |
 |---|---|---|
-| Valen Jhonatan Micelino Pasaribu | 10307240072 | [pitfall/bagian yang dikerjakan] |
+| Valen Jonathan Micelino Pasaribu | 10307240072 | [pitfall/bagian yang dikerjakan] |
 | Muhammad Kafi Rijal | 10307240016 | [pitfall/bagian yang dikerjakan] |
 | Yoga Perkasa Didik | 103072400106 | [pitfall/bagian yang dikerjakan] |
 
