@@ -36,7 +36,7 @@
 
 ---
 
-## Pitfall 3: The network is reliable — ditulis oleh Yoga Perkasa Didik
+## Pitfall 3: Transport cost is zero — ditulis oleh Yoga Perkasa Didik
 
 **Bukti di skenario:** 
 
