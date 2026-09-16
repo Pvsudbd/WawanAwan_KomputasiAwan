@@ -8,7 +8,7 @@
 | Muhammad Kafi Rijal | 10307240016 | [pitfall/bagian yang dikerjakan] |
 | Yoga Perkasa Didik | 103072400106 | [pitfall/bagian yang dikerjakan] |
 
-## Pitfall 1: [nama pitfall] — ditulis oleh [nama]
+## Pitfall 1: Latency Zero — ditulis oleh Valen Jonathan Micelino Pasaribu
 
 **Bukti di skenario:** "Tim menemukan bahwa kode mereka menulis asumsi seperti # network is always reliable, no need for retry"
 
