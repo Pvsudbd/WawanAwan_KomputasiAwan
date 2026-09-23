@@ -31,6 +31,13 @@
       service notifikasi kurir: Menerima event untuk mulai mencari driver terdekat dan mengirimkan notifikasi penugasan pesanan,
       service katalog resto: Menerima event untuk meneruskan pesanan ke pihak restoran
 
+- Nomer 4
+
+Kalau dari yang kami pahami dari Tugas Pertama, “Server menangani 4 modul secara bersamaan”, ini berarti menandakan bahwa 4 modul (Pesanan, Pembayaran, Notifikasi, dan Katalog Resto) masih berjalan dalam satu aplikasi monolitik. Jadi, kalau ada salah satu modul yang mengalami gangguan atau perlu diperbarui, modul lainnya juga berpotensi ikut terdampak karena masih berada dalam satu aplikasi dan server yang sama.
+
+Nah, di cara kami yang baru, kami membuat agar modul Pesanan dan Pembayaran dibuat sebagai service dengan pendekatan SOA (Service-Oriented Architecture) yang nantinya akan mengurangi ketergantungan antar-modul dalam satu aplikasi. Dengan dibuat sebagai service, masing-masing modul dapat berjalan dan dikembangkan secara lebih independen. Jadi, ketika salah satu service mengalami gangguan atau perlu diperbarui, service lainnya tidak harus ikut dihentikan atau diperbarui.
+
+Untuk modul seperti Notifikasi Kurir dan Katalog Resto, kami menggunakan konsep Publish-Subscribe (Pub-Sub). Jika setiap modul harus berkomunikasi secara langsung dengan modul lainnya (contoh, SOA), jumlah hubungan komunikasi dapat meningkat secara kuadratik, yaitu mendekati O(n²), seiring bertambahnya jumlah modul. Sebaliknya, dengan Pub-Sub, setiap modul cukup berkomunikasi dengan message broker, sehingga jumlah hubungan langsung antara modul dan perantara dapat bertambah secara linear, yaitu O(n). Broker kemudian meneruskan event kepada modul-modul yang telah berlangganan. Dengan demikian, Pub-Sub dapat mengurangi jumlah ketergantungan langsung antar-modul dan membuat komunikasi lebih fleksibel.
 ## Log Penggunaan AI (Level 2)
 
 > Wajib diisi sesuai kebijakan Level 2 di [`../RUBRIK-UMUM.md`](../RUBRIK-UMUM.md). Tulis "Tidak memakai AI" pada baris pertama jika memang tidak dipakai. Hanya untuk brainstorming ide/outline — bukan untuk kode/analisis/teks akhir.
