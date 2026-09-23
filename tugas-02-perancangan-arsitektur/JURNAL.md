@@ -8,26 +8,26 @@
 - Alur Skenario: Pelanggan --> Service Pesanan --> Service Pembayaran --> Message Broker --> Service Notifikasi Kurir & Service Katalog Resto
   
   * Tahap 1: Pelanggan membuat pesanan
-   * Interaksi: Pelanggan --> Service Pesanan
-   *  Jenis Komunikasi: Sinkron
-   *  Penjelasan: Pelanggan mengirimkan pesanan baru ke sistem, service pesanan menerima dan memvalidasi pesanan tersebut
+  * Interaksi: Pelanggan --> Service Pesanan
+  * Jenis Komunikasi: Sinkron
+  * Penjelasan: Pelanggan mengirimkan pesanan baru ke sistem, service pesanan menerima dan memvalidasi pesanan tersebut
 
-  Tahap 2: Pemrosesan pembayaran
-    Interaksi: Service Pesanan --> Service Pembayaran
-    Jenis Komunikasi: Sinkron
-    Penjelasan: Service pesanan memanggil service pembayaran untuk memproses pembayaran transaksi, komunikasi dilakukan
-    secara sinkron karena pesanan memerlukan konfirmasi langsung mengenai status pembayaran sebelum diproses lebih lanjut
+  * Tahap 2: Pemrosesan pembayaran
+  * Interaksi: Service Pesanan --> Service Pembayaran
+  * Jenis Komunikasi: Sinkron
+  * Penjelasan: Service pesanan memanggil service pembayaran untuk memproses pembayaran transaksi, komunikasi dilakukan
+  * secara sinkron karena pesanan memerlukan konfirmasi langsung mengenai status pembayaran sebelum diproses lebih lanjut
 
-  Tahap 3: Publikasi event pesanan dibuat
-    Interaksi: Service Pembayaran --> Message Broker
-    Jenis Komunikasi: Asinkron
-    Penjelasan: Setelah pembayaran selesai
+  * Tahap 3: Publikasi event pesanan dibuat
+  * Interaksi: Service Pembayaran --> Message Broker
+  * Jenis Komunikasi: Asinkron
+  * Penjelasan: Setelah pembayaran selesai
 
-  Tahap 4: Distribusi event ke subcriber
-    Interaksi: Message Broker --> Service Notifikasi Kuris & Service Katalog Resto
-    Jenis Komunikasi: Asinkron
-    Penjelasan: Message broker meneruskan event secara independen ke modul modul yang berlangganan:
-      service notifikasi kurir: Menerima event untuk mulai mencari driver terdekat dan mengirimkan notifikasi penugasan pesanan
+  * Tahap 4: Distribusi event ke subcriber
+  * Interaksi: Message Broker --> Service Notifikasi Kuris & Service Katalog Resto
+  * Jenis Komunikasi: Asinkron
+  * Penjelasan: Message broker meneruskan event secara independen ke modul modul yang berlangganan:
+      service notifikasi kurir: Menerima event untuk mulai mencari driver terdekat dan mengirimkan notifikasi penugasan pesanan,
       service katalog resto: Menerima event untuk meneruskan pesanan ke pihak restoran
 
 ## Log Penggunaan AI (Level 2)
