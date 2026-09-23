@@ -10,7 +10,7 @@
   * Tahap 1: Pelanggan membuat pesanan
   * Interaksi: Pelanggan --> Service Pesanan
   * Jenis Komunikasi: Sinkron
-  * Penjelasan: Pelanggan mengirimkan pesanan baru ke sistem, service pesanan menerima dan memvalidasi pesanan tersebut
+  * Penjelasan: Pelanggan mengirimkan pesanan baru ke sistem, service pesanan menerima dan memvalidasi pesanan tersebut/n
 
   * Tahap 2: Pemrosesan pembayaran
   * Interaksi: Service Pesanan --> Service Pembayaran
