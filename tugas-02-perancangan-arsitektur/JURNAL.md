@@ -5,7 +5,8 @@
   Kelompok kami memutuskan untuk menggunakan keduanya yakni Service-Oriented Architecture (SOA) atau Publish-Subscribe. 
 - Kenapa akhirnya pilih [SOA/Pub-Sub]: pertama kami menggunakan SOA untuk memecah proses monolith yakni semua service berada pada satu runtutan/ satu aplikasi, ini bisa bermasalah jika salah satu service mengalami kendala yang akan berakibat service lainya juga berkendala sehingga ini kurang baik untuk implementasi pada FoodGo. lalu untuk pub-sub berfungsi untuk menangani kendala apabila ada service yang melakukan request ke service lain namun service yang di tuju sedang tidak tersedia sedangkan service yang melakukan request masih harus melakukan request ke service lain. dan ini menjadi masalah ketika mau ada pembaruan/deploy ulang salah satu service. kedua solusi tersebut bertujuan untuk, pertama memecah service dari yang tadinya monolith, sedangakan untuk pub-sub untuk menangani bagaimana service berkomunikasi tanpa terlalu bergantung satu sama lain.
 - Revisi:
-- Alur Skenario: Pelanggan --> Service Pesanan --> Service Pembayaran --> Message Broker --> Service Notifikasi Kurir & Service Katalog Resto
+- Alur Skenario: Pelanggan --> Service Pesanan --> Service Pembayaran
+                                               |-> Message Broker --> Service Notifikasi Kurir & Service Katalog Resto
   
   * Tahap 1: Pelanggan membuat pesanan
   * Interaksi: Pelanggan --> Service Pesanan
@@ -21,7 +22,7 @@
   * Tahap 3: Publikasi event pesanan dibuat
   * Interaksi: Service Pembayaran --> Message Broker
   * Jenis Komunikasi: Asinkron
-  * Penjelasan: Setelah pembayaran selesai
+  * Penjelasan: Setelah pembayaran selesai, service pesanan akan membuat event untuk message broker
 
   * Tahap 4: Distribusi event ke subcriber
   * Interaksi: Message Broker --> Service Notifikasi Kuris & Service Katalog Resto
