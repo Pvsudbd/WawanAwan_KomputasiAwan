@@ -12,6 +12,11 @@
     Jenis Komunikasi: Sinkron
     Penjelasan: Pelanggan mengirimkan pesanan baru ke sistem, service pesanan menerima dan memvalidasi pesanan tersebut
 
+  * **Tahap 1: Pelanggan Membuat Pesanan**
+  * **Interaksi:** Pelanggan ➔ Service Pesanan
+  * **Jenis Komunikasi:** Sinkron (Request-Response)
+  * **Penjelasan:** Pelanggan mengirimkan permintaan pesanan baru ke sistem. Service Pesanan menerima dan memvalidasi data pesanan tersebut.
+
   Tahap 2: Pemrosesan pembayaran
     Interaksi: Service Pesanan --> Service Pembayaran
     Jenis Komunikasi: Sinkron
