@@ -17,9 +17,7 @@ NUM_WORKERS = 10        # jumlah thread pekerja
 processed_count = 0
 
 # TODO 1: Buat objek Lock di sini untuk melindungi `processed_count`.
-lock = threading.Lock()
-
-USE_LOCK = "--no-lock" not in sys.argv
+# lock = threading.Lock()
 
 
 def process_order(order_id: int) -> None:
@@ -35,14 +33,11 @@ def process_order(order_id: int) -> None:
     # Langkah 2: bungkus increment dengan `with lock:` dan buktikan hasilnya
     #            selalu tepat NUM_ORDERS. Simpan bukti kedua kondisi ini
     #            di JURNAL.md / folder bukti/.
-    if USE_LOCK:
-        with lock:
-            current = processed_count
-            time.sleep(0.0001)
-            processed_count = current + 1
-    else: 
-        
-    pass
+    
+    # VERSI TANPA LOCK (Untuk memicu Race Condition)
+    current = processed_count
+    time.sleep(0.0001)
+    processed_count = current + 1
 
 
 def worker(order_ids: list) -> None:
@@ -58,7 +53,16 @@ def main() -> None:
     # threading.Thread per bagian yang menjalankan `worker(...)`,
     # start semua thread, lalu join semua thread sebelum lanjut.
     threads = []
-    # ... isi logika pembagian tugas & pembuatan thread di sini ...
+    
+    chunk_size = len(order_ids) // NUM_WORKERS
+    for i in range(NUM_WORKERS):
+        start_idx = i * chunk_size
+        end_idx = start_idx + chunk_size if i < NUM_WORKERS - 1 else len(order_ids)
+        worker_orders = order_ids[start_idx:end_idx]
+        
+        t = threading.Thread(target=worker, args=(worker_orders,))
+        threads.append(t)
+        t.start()
 
     for t in threads:
         t.join()
