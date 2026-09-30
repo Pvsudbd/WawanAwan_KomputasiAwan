@@ -20,4 +20,4 @@
 
 | Tanggal | Tool AI | Prompt yang diberikan | Ringkasan saran/ide AI | Bagaimana diolah jadi tulisan/kode sendiri |
 |---|---|---|---|---|
-| ... | ... | ... | ... | ... |
+| 9/30/2026 | Chatgpt | Apakah fork dapat membebani server kalau arsitektur dan resourcenya sudah diperbaiki agar gak seburuk studi kasus? | Penggunaan fork() tidak selalu membebani server secara berlebihan. Namun, pada studi kasus dengan resource terbatas dan banyak request secara bersamaan, pembuatan proses baru untuk setiap request dapat meningkatkan penggunaan resource dan overhead. Dengan arsitektur yang lebih baik seperti process pool atau server dengan resource yang memadai, penggunaan proses masih dapat menjadi pilihan yang sesuai. | (Kebutuhan brainstroming, belum diketik) |
