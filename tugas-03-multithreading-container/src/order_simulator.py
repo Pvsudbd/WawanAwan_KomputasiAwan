@@ -8,14 +8,6 @@ Jangan mengubah nama fungsi (dipakai untuk pengecekan otomatis oleh asisten).
 import threading
 import random
 import time
-import logging
-
-# Konfigurasi format log yang bagus (menampilkan waktu, nama thread, dan pesan)
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s | %(threadName)-10s | %(message)s',
-    datefmt='%H:%M:%S'
-)
 
 NUM_ORDERS = 100        # jumlah pesanan simulasi yang masuk
 NUM_WORKERS = 10        # jumlah thread pekerja
@@ -24,17 +16,15 @@ NUM_WORKERS = 10        # jumlah thread pekerja
 # Sengaja rawan race condition jika diakses tanpa proteksi.
 processed_count = 0
 
-# Tambahan: Untuk melacak dan mencetak thread mana yang saling timpa (hanya untuk log)
-tracker_lock = threading.Lock()
-write_tracker = {}
-
 # TODO 1: Buat objek Lock di sini untuk melindungi `processed_count`.
-# lock = threading.Lock()
+lock = threading.Lock()
+
+USE_LOCK = "--no-lock" not in sys.argv
 
 
 def process_order(order_id: int) -> None:
     """Proses satu pesanan. Dipanggil oleh tiap thread pekerja."""
-    global processed_count, write_tracker
+    global processed_count
 
     # Simulasikan kerja nyata (mis. validasi, hitung total harga)
     time.sleep(random.uniform(0.001, 0.01))
@@ -45,20 +35,17 @@ def process_order(order_id: int) -> None:
     # Langkah 2: bungkus increment dengan `with lock:` dan buktikan hasilnya
     #            selalu tepat NUM_ORDERS. Simpan bukti kedua kondisi ini
     #            di JURNAL.md / folder bukti/.
-    
-    # VERSI TANPA LOCK (Untuk memicu Race Condition)
-    current = processed_count
-    
-    time.sleep(0.0001)
-    
-    processed_count = current + 1
-    
-    # Catat thread mana yang merubah angka menjadi ini
-    thread_name = threading.current_thread().name
-    with tracker_lock:
-        if processed_count not in write_tracker:
-            write_tracker[processed_count] = []
-        write_tracker[processed_count].append(thread_name)
+
+    if USE_LOCK:
+        with lock:
+            current = processed_count
+            time.sleep(0.0001)
+            processed_count = current + 1
+    else:
+        # VERSI TANPA LOCK (Untuk memicu Race Condition)
+        current = processed_count
+        time.sleep(0.0001)
+        processed_count = current + 1
 
 
 def worker(order_ids: list) -> None:
@@ -88,13 +75,9 @@ def main() -> None:
     for t in threads:
         t.join()
 
-    print(f"\nTotal pesanan diproses: {processed_count} (seharusnya {NUM_ORDERS})")
+    print(f"Total pesanan diproses: {processed_count} (seharusnya {NUM_ORDERS})")
     if processed_count != NUM_ORDERS:
-        print("RACE CONDITION TERDETEKSI - lengkapi TODO 1 & TODO 2 dengan Lock!\n")
-        print("--- DAFTAR THREAD YANG SALING TIMPA ---")
-        for val, threads_list in sorted(write_tracker.items()):
-            if len(threads_list) > 1:
-                print(f"Angka {val} ditimpa bersamaan oleh {len(threads_list)} thread: {', '.join(threads_list)}")
+        print("RACE CONDITION TERDETEKSI - lengkapi TODO 1 & TODO 2 dengan Lock!")
 
 
 if __name__ == "__main__":
