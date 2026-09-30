@@ -84,7 +84,7 @@ def main() -> None:
 
     print(f"Total pesanan diproses: {processed_count} (seharusnya {NUM_ORDERS})")
     if processed_count != NUM_ORDERS:
-        print("RACE CONDITION TERDETEKSI - lengkapi TODO 1 & TODO 2 dengan Lock!")
+        print("RACE CONDITION TERDETEKSI")
 
 
 if __name__ == "__main__":
