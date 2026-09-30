@@ -12,7 +12,10 @@
 - Dari studi kasus pada tugas satu dan dua, kita dapat melihat jika server yang tersedia memiliki resource yang sangat terbatas dan jika terus menggunakan fork() seperti pada simulasi tugas pertama maka akan sangat menghabiskan resource server dan tidak efisien, hal itu disebabkan karena setiap proses baru memiliki salinan memorinya sendiri. Oleh karena itu, digunakan multithreading sebagai alternatif karena thread berjalan dalam satu proses dan dapat berbagi resource seperti memori, sehingga overhead (biaya penggunaan resource untuk menjalankan dan mengelola thread/proses) yang digunakan lebih kecil dibandingkan membuat proses baru untuk setiap pesanan. Dengan menggunakan multithreading, beberapa pesanan juga dapat diproses secara konkuren tanpa harus membuat proses baru untuk setiap pesanan.
 
 ## Kendala Dockercl
-- Error yang ditemui saat `docker build`/`docker run` dan cara memperbaikinya: ...
+- Error yang ditemui saat `docker build`/`docker run` dan cara memperbaikinya: Tidak terjadi error ketika docker build ataupun docker run
+
+- Percobaan docker tanpa lock: ![Bukti Tanpa Lock](bukti/tanpalockdocker.png)
+- Percobaan docker dengan lock: ![Bukti Dengan Lock](bukti/denganlockdocker.png)
 
 ## Log Penggunaan AI (Level 2)
 
