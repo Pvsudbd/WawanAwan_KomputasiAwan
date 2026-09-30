@@ -36,12 +36,12 @@ def process_order(order_id: int) -> None:
     #            selalu tepat NUM_ORDERS. Simpan bukti kedua kondisi ini
     #            di JURNAL.md / folder bukti/.
     if USE_LOCK:
-        
-    else: 
         with lock:
             current = processed_count
             time.sleep(0.0001)
             processed_count = current + 1
+    else: 
+        
     pass
 
 
