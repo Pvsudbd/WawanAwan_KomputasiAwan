@@ -9,7 +9,7 @@ import time
 
 def main():
     # TODO 1: buat ServerProxy ke http://localhost:8000
-    proxy = None  # ganti dengan xmlrpc.client.ServerProxy(...)
+    proxy = xmlrpc.client.ServerProxy("http://localhost:8000")  # ganti dengan xmlrpc.client.ServerProxy(...)
 
     print("Memanggil cek_saldo('user1') ... menunggu respons sinkron")
     start = time.time()
