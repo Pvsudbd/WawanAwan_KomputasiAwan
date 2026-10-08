@@ -17,7 +17,10 @@ def cek_saldo(user_id: str) -> float:
     # TODO 1: kembalikan saldo dari dict `saldo_user`.
     # Jika user_id tidak ada, putuskan sendiri perilakunya (mis. return 0 atau raise error)
     # dan jelaskan keputusan ini di README.md.
-    pass
+    if user_id not in saldo_user:
+        raise ValueError(f"User '{user_id}' tidak ditemukan.")
+    return saldo_user[user_id]
+    
 
 
 def proses_pembayaran(user_id: str, jumlah: float) -> dict:
