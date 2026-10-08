@@ -27,11 +27,18 @@ def main():
             "timestamp": time.time(),
         }
         # TODO 3: publish `pesan` (di-encode json) ke QUEUE_NAME memakai
+        channel.basic_publish(
+            exchange='', 
+            routing_key=QUEUE_NAME, 
+            body=json.dumps(pesan)  # Mengubah dictionary Python menjadi string JSON
+        )
         # channel.basic_publish(...). Cetak log "Event terkirim: ..." setiap publish.
+        print(f"Event terkirim: {pesan}")
         print(f"[TODO] Event belum benar-benar terkirim: {pesan}")
         time.sleep(1)
 
     # TODO 4: tutup koneksi (connection.close()) setelah selesai.
+    connection.close()
     print("Publisher selesai mengirim event.")
 
 
