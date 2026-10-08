@@ -34,7 +34,7 @@ def main():
         )
         # channel.basic_publish(...). Cetak log "Event terkirim: ..." setiap publish.
         print(f"Event terkirim: {pesan}")
-        print(f"[TODO] Event belum benar-benar terkirim: {pesan}")
+        print(f"Event belum benar-benar terkirim: {pesan}")
         time.sleep(1)
 
     # TODO 4: tutup koneksi (connection.close()) setelah selesai.
