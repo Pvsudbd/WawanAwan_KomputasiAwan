@@ -18,6 +18,8 @@ def callback(ch, method, properties, body):
     ch.basic_ack(delivery_tag=method.delivery_tag)
     # TODO 2: kirim acknowledgement ke RabbitMQ (ch.basic_ack) supaya
     # pesan dihapus dari antrean setelah berhasil diproses.
+    ch.basic_ack(delivery_tag=method.delivery_tag)
+    print(f"Pesan diterima dan diproses: {pesan}")
 
 
 def main():
