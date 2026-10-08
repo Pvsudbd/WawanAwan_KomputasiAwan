@@ -13,8 +13,8 @@ QUEUE_NAME = "pembayaran_berhasil"
 def main():
     # TODO 1: buat koneksi ke RabbitMQ di localhost (pika.BlockingConnection
     # dengan ConnectionParameters(host="localhost")), lalu buat channel.
-    connection = None
-    channel = None
+    connection = pika.BlockingConnection(pika.ConnectionParameters(host="localhost"))
+    channel = connection.channel()
 
     # TODO 2: deklarasikan queue dengan nama QUEUE_NAME (channel.queue_declare),
     # gunakan durable=True supaya pesan tidak hilang walau RabbitMQ restart.
