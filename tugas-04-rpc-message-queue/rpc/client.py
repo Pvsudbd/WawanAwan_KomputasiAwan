@@ -20,6 +20,8 @@ def main():
 
     print("Memanggil proses_pembayaran('user1', 20000) ...")
     # TODO 3: panggil proxy.proses_pembayaran("user1", 20000) dan cetak hasilnya
+    hasil_bayar = proxy.proses_pembayaran("user1", 20000)
+    print(f"Hasil pembayaran: {hasil_bayar} (waktu tempuh: {time.time() - start_bayar:.4f} detik)")
 
 
 if __name__ == "__main__":
