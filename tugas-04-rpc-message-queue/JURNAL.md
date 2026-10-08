@@ -4,7 +4,8 @@
 - [RPC / MQ / keduanya], alasan: Kami memilih keduanya untuk masing masing kasus. pertama yakni proses pembayaran perlu menggunakan rpc karena aksi pembayaran harus synchoronus. Proses pembayaran bersifat transaksional dan membutuhkan konsistensi data secara instan (real-time), jadi nantinya client akan menunggu validasi sistem lalu menampilkan notif dari status transaksi. sedangkan untuk kasus kedua yakni modul kurir/notifikasi bagus untuk menggunakan MQ/asynchronus karena ada kondisi dimana mungkin modul kurir bisa saja down/off(pokoknya berkendala) pesan akan masuk ke dalam antrian di rabbitMQ, sehingga ini membuat decoupling antar modul dan membuat modul pembayaran/pesanan tidak akan menunggu kurir dan bisa lanjut ke proses selanjutnya. 
 
 ## Kendala teknis
-- Error saat setup (mis. koneksi RabbitMQ ditolak, port bentrok): ...
+- Error saat setup (mis. koneksi RabbitMQ ditolak, port bentrok):
+- Sejauh ini tidak ada eror saat melakukan koneksi RabbitMQ maupun Docker compose. Namun beberapa teman kami ada kesulitan dalam install docker karena size yang tidak cukup.
 
 ## Uji "pesan tidak hilang" (khusus Jalur B)
 - **Langkah uji:** Matikan `consumer.py` → jalankan `publisher.py` (kirim 3 pesan) → nyalakan `consumer.py` lagi.
