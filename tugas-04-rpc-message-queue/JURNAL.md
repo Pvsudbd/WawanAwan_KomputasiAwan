@@ -7,8 +7,14 @@
 - Error saat setup (mis. koneksi RabbitMQ ditolak, port bentrok): ...
 
 ## Uji "pesan tidak hilang" (khusus Jalur B)
-- Langkah uji: matikan consumer → jalankan publisher → nyalakan consumer
-- Hasil yang diamati: ...
+- **Langkah uji:** Matikan `consumer.py` → jalankan `publisher.py` (kirim 3 pesan) → nyalakan `consumer.py` lagi.
+- **Hasil yang diamati:** 
+  1. Pas `consumer.py` dimatikan dulu terus kita jalankan `publisher.py`, si publisher tetep bisa ngirim 3 pesan pembayaran tanpa ada error sama sekali (bisa dilihat di foto [`bukti/MOM Asinkron - consumer offline.png`](bukti/MOM%20Asinkron%20-%20consumer%20offline.png)). 
+  2. Terus pas dicek di dashboard RabbitMQ (foto [`bukti/rabbitmq - consumer offline.png`](bukti/rabbitmq%20-%20consumer%20offline.png)), 3 pesan itu ga hilang tapi ketahan dan numpuk di antrean `pembayaran_berhasil` dengan status **Ready: 3**.
+  3. Nah, begitu `consumer.py` kita nyalain lagi (foto [`bukti/MOM Asinkron - consumer online.png`](bukti/MOM%20Asinkron%20-%20consumer%20online.png)), si consumer langsung otomatis nyedot dan memproses 3 pesan yang sempet nunggu tadi. Pas dicheck lagi di dashboard RabbitMQ (foto [`bukti/rabbitmq - consumer online.png`](bukti/rabbitmq%20-%20consumer%20online.png)), jumlah antreannya langsung balik jadi 0 (**Ready: 0**). Ini ngebuktiin kalau pake Message Queue, pesan tetep aman dan ga bakal hilang walaupun aplikasinya sempet mati.
+  
+**Kesimpulan Uji Pengiriman Pesan:**
+Percobaan ini membuktikan bahwa Message Queue punya sifat *asynchronous decoupling*. Artinya, modul pengirim dan modul penerima benar-benar independen, jadi pengirim tidak perlu menunggu penerima aktif, dan data transaksi dijamin aman tersimpan di RabbitMQ tanpa risiko hilang sedikit pun meskipun layanan penerima sedang mati.
 
 ## Log Penggunaan AI (Level 2)
 
