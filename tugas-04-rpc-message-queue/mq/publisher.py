@@ -18,6 +18,7 @@ def main():
 
     # TODO 2: deklarasikan queue dengan nama QUEUE_NAME (channel.queue_declare),
     # gunakan durable=True supaya pesan tidak hilang walau RabbitMQ restart.
+    channel.queue_declare(queue=QUEUE_NAME, durable=True)
 
     for i in range(1, 4):
         pesan = {
