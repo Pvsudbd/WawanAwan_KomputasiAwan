@@ -40,6 +40,10 @@ def main():
     # TODO 3: buat SimpleXMLRPCServer di localhost port 8000,
     # daftarkan fungsi cek_saldo & proses_pembayaran, lalu serve_forever().
     server = SimpleXMLRPCServer(("localhost", 8000))
+    
+    server.register_function(cek_saldo, "cek_saldoo")
+    server.register_function(proses_pembayaran, "proses_pembayaran")
+    
     print("RPC server modul Pembayaran berjalan di port 8000...")
     server.serve_forever()
 
