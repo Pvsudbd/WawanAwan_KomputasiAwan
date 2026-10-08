@@ -15,7 +15,6 @@ def callback(ch, method, properties, body):
     # TODO 1: proses pesan (misalnya cetak "Kurir menerima notifikasi
     # pembayaran untuk {user_id} sejumlah {jumlah}").
     print(f"Kurir menerima notifikasi: {pesan}")
-    ch.basic_ack(delivery_tag=method.delivery_tag)
     # TODO 2: kirim acknowledgement ke RabbitMQ (ch.basic_ack) supaya
     # pesan dihapus dari antrean setelah berhasil diproses.
     ch.basic_ack(delivery_tag=method.delivery_tag)
