@@ -26,6 +26,7 @@ class Node:
         self.peers = peers
         self.leader_id = None
         self.lock = threading.Lock()
+        self.ok_received = threading.Event()
 
     # ---------- Infrastruktur jaringan (SUDAH LENGKAP, jangan diubah) ----------
 
@@ -78,6 +79,7 @@ class Node:
             self.ok_received.set()
         elif msg_type == "COORDINATOR":
             self.leader_id = sender_id
+            print(f"[Node {self.node_id}] Leader saat ini adalah Node {self.leader_id}")
 
     def start_election(self):
         """Dipanggil saat node ini mendeteksi leader tidak ada / tidak merespons."""
