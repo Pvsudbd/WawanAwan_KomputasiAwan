@@ -27,6 +27,7 @@ class Node:
         self.leader_id = None
         self.lock = threading.Lock()
         self.ok_received = threading.Event()
+        self.is_electing = False
 
     # ---------- Infrastruktur jaringan (SUDAH LENGKAP, jangan diubah) ----------
 
@@ -74,7 +75,10 @@ class Node:
         if msg_type == "ELECTION":
             if self.node_id > sender_id:
                 self.send_message(self.peers[sender_id], "OK")
-                threading.Thread(target=self.start_election, daemon=True).start()
+                if self.leader_id == self.node_id:
+                    self.send_message(self.peers[sender_id], "COORDINATOR")
+                else:
+                    threading.Thread(target=self.start_election, daemon=True).start()
         elif msg_type == "OK":
             self.ok_received.set()
         elif msg_type == "COORDINATOR":
@@ -87,19 +91,25 @@ class Node:
         # Tunggu ELECTION_TIMEOUT detik untuk balasan "OK" (gunakan flag/event yang
         # diset di on_message saat menerima "OK").
         # Jika TIDAK ADA balasan "OK" dalam waktu tersebut -> panggil declare_leader().
-        higher_peers = {pid: p for pid, p in self.peers.items() if pid > self.node_id}
-        print(f"[Node {self.node_id}] mulai election ke peer lebih tinggi: {higher_peers}")
-        if not higher_peers:
-            self.declare_leader()
+        if self.is_electing or self.leader_id == self.node_id:
             return
+        self.is_electing = True
+        try:
+            higher_peers = {pid: p for pid, p in self.peers.items() if pid > self.node_id}
+            print(f"[Node {self.node_id}] mulai election ke peer lebih tinggi: {higher_peers}")
+            if not higher_peers:
+                self.declare_leader()
+                return
 
-        self.ok_received.clear()
-        for pid, port in higher_peers.items():
-            self.send_message(port, "ELECTION")
+            self.ok_received.clear()
+            for pid, port in higher_peers.items():
+                self.send_message(port, "ELECTION")
 
-        dapat_ok = self.ok_received.wait(timeout=ELECTION_TIMEOUT)
-        if not dapat_ok:
-            self.declare_leader()
+            dapat_ok = self.ok_received.wait(timeout=ELECTION_TIMEOUT)
+            if not dapat_ok:
+                self.declare_leader()
+        finally:
+            self.is_electing = False
 
     def declare_leader(self):
         """Node ini menyatakan dirinya leader dan memberi tahu semua node lain."""
