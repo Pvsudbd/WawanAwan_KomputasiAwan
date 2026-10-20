@@ -28,6 +28,7 @@ class Node:
         self.lock = threading.Lock()
         self.ok_received = threading.Event()
         self.is_electing = False
+        self.election_start_time = None  # waktu saat leader terdeteksi mati
 
     # ---------- Infrastruktur jaringan (SUDAH LENGKAP, jangan diubah) ----------
 
@@ -117,8 +118,15 @@ class Node:
         # ke SEMUA peer (bukan cuma yang lebih tinggi).
         with self.lock:
             self.leader_id = self.node_id
-            
-        print(f"[Node {self.node_id}] Mengumumkan diri sebagai COORDINATOR (leader baru)!")
+
+        # Hitung waktu deteksi leader mati -> leader baru terpilih
+        if self.election_start_time is not None:
+            elapsed_ms = (time.time() - self.election_start_time) * 1000
+            print(f"[Node {self.node_id}] Mengumumkan diri sebagai COORDINATOR (leader baru)!")
+            print(f"[Node {self.node_id}] *** Waktu deteksi leader mati -> leader baru: {elapsed_ms:.4f} ms ***")
+            self.election_start_time = None
+        else:
+            print(f"[Node {self.node_id}] Mengumumkan diri sebagai COORDINATOR (leader baru)!")
         for peer_id, peer_port in self.peers.items():
             self.send_message(peer_port, "COORDINATOR")
 
@@ -139,7 +147,9 @@ class Node:
             if leader_port:
                 is_alive = self.send_message(leader_port, "PING")
                 if not is_alive:
+                    self.election_start_time = time.time()  # catat waktu deteksi leader mati
                     print(f"[Node {self.node_id}] Deteksi leader (Node {current_leader}) mati/down! Memulai election...")
+                    print(f"[Node {self.node_id}] [TIMER MULAI] Waktu deteksi: {time.strftime('%H:%M:%S')}")
                     with self.lock:
                         self.leader_id = None
                     self.start_election()
