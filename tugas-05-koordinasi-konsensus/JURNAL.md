@@ -9,21 +9,33 @@
 ### 1. Log terminal
 
 A. T1
+
 ![alt text](bukti/image.png)
+
 B. T2
+
 ![alt text](bukti/image-1.png)
+
 C. T3
+
 ![alt text](bukti/image-2.png)
+
 D. T4
+
 ![alt text](bukti/image-3.png)
+
 E. T5 (Leader)
+
 ![alt text](bukti/image-4.png)
 
 
 ## Skenario 2: Leader dimatikan
 - Leader baru yang terpilih: Node 4
+- 
 ![alt text](bukti/image-5.png)
+
 - Berapa lama waktu sampai leader baru terdeteksi: 4031.0645 ms atau 4 detik
+- 
 ![alt text](bukti/image-6.png)
 
 ## Observasi code dan logika bully
@@ -49,4 +61,6 @@ Kalau menurut kami, algoritma yang cocok untuk mengganti algoritma di foodgo ada
 
 | Tanggal | Tool AI | Prompt yang diberikan | Ringkasan saran/ide AI | Bagaimana diolah jadi tulisan/kode sendiri |
 |---|---|---|---|---|
+| 10/20/2026 | ChatGPT | di bully kegagalan satu node kan ngebuat node lain harus menunggu 2 detik untuk memastikan node besar beneran mati. Kalau di raft elama mayoritas node masih aktif, kegagalan satu node gak bakal mempengaruhi pengiriman pesan antar node lain, nah apakah ini gak mempengaruhi waktu juga| Jadi, Raft bukan berarti tidak memiliki delay. Raft juga memakai election timeout, yang umumnya dibuat acak dalam rentang tertentu untuk mengurangi kemungkinan beberapa node memulai pemilihan bersamaan.node yang masih hidup tetap bisa bertukar pesan meskipun satu node mati, selama koneksi di antara mereka tersedia.| Diolah sesuai di C |
 | ... | ... | ... | ... | ... |
+
