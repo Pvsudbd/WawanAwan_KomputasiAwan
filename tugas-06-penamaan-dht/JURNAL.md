@@ -68,6 +68,13 @@ Sebelum keluar. Ring berisi lima node dengan urutan 40 → 102 → 123 → 136 �
 
 Sesudah keluar. Node 177 dihapus, sehingga sisa ring menjadi 40 → 102 → 123 → 136. Sekarang tidak ada lagi node dengan ID ≥ 175, jadi pencarian kembali ke awal ring (wrap-around) dan kurir-005 pindah ke node bandung-1 (40). Hasil lookup setelah node keluar menunjukkan kurir-001, kurir-002, dan kurir-005 masih bisa diakses dengan IP yang tepat.
 
+## Gambar : Sebelum node baru masuk
+<img width="1016" height="662" alt="image" src="https://github.com/user-attachments/assets/35e92891-fcb4-4e8b-a1d8-99e1fe402b68" />
+
+## Gambar : Sesudah node baru masuk
+<img width="1152" height="691" alt="image" src="https://github.com/user-attachments/assets/5b2c0ede-4ad0-4b58-9612-3fdc8c6ebfcd" />
+
+
 ## Log Penggunaan AI (Level 2)
 
 > Wajib diisi sesuai kebijakan Level 2 di [`../RUBRIK-UMUM.md`](../RUBRIK-UMUM.md). Tulis "Tidak memakai AI" pada baris pertama jika memang tidak dipakai. Hanya untuk brainstorming ide/outline — bukan untuk kode/analisis/teks akhir.
