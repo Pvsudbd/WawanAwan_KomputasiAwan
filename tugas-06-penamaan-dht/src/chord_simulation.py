@@ -18,7 +18,7 @@ def hash_id(key: str) -> int:
 
 
 class ChordRing:
-    def _init_(self):
+    def __init__(self):
         # node_id (hasil hash) -> alamat IP node tersebut
         self.nodes: dict[int, str] = {}
         # key kurir (hasil hash) -> IP kurir yang disimpan node yang bertanggung jawab
@@ -29,18 +29,17 @@ class ChordRing:
         menjadi tanggung jawab node baru ini dari successor lamanya."""
         node_id = hash_id(node_name)
 
-
-        # TODO 1: tambahkan node_id -> node_ip ke self.nodes.
-        self.nodes[node_id] = node_ip
-        print(f"Node '{node_name}' (id={node_id}) bergabung, alamat {node_ip}")
-        
         # TODO 2: cari successor LAMA dari node_id ini (successor sebelum node
         # baru bergabung, gunakan find_successor() dengan node_id INI dikecualikan
         # dulu dari self.nodes saat mencari).
         old_successor = None
         if len(self.nodes) > 0:
             old_successor = self.find_successor(node_id)
-        
+
+        # TODO 1: tambahkan node_id -> node_ip ke self.nodes.
+        self.nodes[node_id] = node_ip
+        print(f"Node '{node_name}' (id={node_id}) bergabung, alamat {node_ip}")
+
         # TODO 3: pindahkan semua key di self.data yang seharusnya menjadi
         # tanggung jawab node baru (key dengan hash <= node_id, tapi masih
         # dipegang oleh successor lama) ke bawah tanggung jawab node baru.
@@ -110,6 +109,7 @@ class ChordRing:
             return self.data[key_hash][1]
         return None
 
+
 def main():
     ring = ChordRing()
 
@@ -123,19 +123,26 @@ def main():
     ring.register_kurir("kurir-001", "192.168.1.10")
     ring.register_kurir("kurir-002", "192.168.1.11")
     ring.register_kurir("kurir-003", "192.168.1.12")
+    ring.register_kurir("kurir-005", "192.168.1.14")
+    ring.register_kurir("kurir-012", "192.168.1.15")
 
     print("\n--- Lookup sebelum perubahan topologi ---")
     print("kurir-001 ->", ring.lookup("kurir-001"))
     print("kurir-002 ->", ring.lookup("kurir-002"))
+    print("kurir-003 ->", ring.lookup("kurir-003"))
+    print("kurir-005 ->", ring.lookup("kurir-005"))
+    print("kurir-012 ->", ring.lookup("kurir-012"))
 
     print("\n--- Node baru bergabung ---")
     ring.join("node-medan-1", "10.0.0.5")
     print("kurir-001 ->", ring.lookup("kurir-001"))
+    print("kurir-012 ->", ring.lookup("kurir-012"))
 
     print("\n--- Sebuah node keluar ---")
     ring.leave("node-jakarta-1")
     print("kurir-001 ->", ring.lookup("kurir-001"))
     print("kurir-002 ->", ring.lookup("kurir-002"))
+    print("kurir-005 ->", ring.lookup("kurir-005"))
 
 
 if __name__ == "__main__":
