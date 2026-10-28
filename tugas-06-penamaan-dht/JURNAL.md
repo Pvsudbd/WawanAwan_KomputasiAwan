@@ -37,4 +37,5 @@ Sesudah keluar. Node 177 dihapus, sehingga sisa ring menjadi 40 → 102 → 123 
 
 | Tanggal | Tool AI | Prompt yang diberikan | Ringkasan saran/ide AI | Bagaimana diolah jadi tulisan/kode sendiri |
 |---|---|---|---|---|
-| ... | ... | ... | ... | ... |
+| 10/8/2026 | ChatGPT | Apa perbedaan masalah cache staleness pada DNS dibanding lookup langsung di DHT Chord untuk IP dinamis? | DNS bergantung pada TTL; jika TTL lama maka IP kurir jadi stale (ketinggalan), jika TTL 0 maka Authoritative DNS server kebanjiran request (lookup storm). DHT mendistribusikan penyimpanan mapping langsung ke node successor sehingga update langsung terbaca tanpa stale cache. | Kami pakai ide ini untuk menyusun argumen perbandingan di README.md bagian 1, menjelaskan kenapa FoodGo lebih cocok memakai DHT Chord daripada DNS atau tabel pusat. |
+| 10/8/2026 | ChatGPT | Bagaimana logika perpindahan data (rebalancing) saat node baru join di antara dua node pada Chord? | Node baru N mengambil alih key dari successor lamanya untuk key yang nilainya <= N dan > predecessor N. Sisanya tetap di node lama. | Kami implementasikan ke dalam loop di method `join()` dan `leave()` di `chord_simulation.py` untuk mendeteksi key mana yang berpindah dan mencatat log perpindahannya. |
