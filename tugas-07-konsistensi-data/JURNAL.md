@@ -86,4 +86,4 @@ Kami menyimpulkan solusi yang tepat adalah mengombinasikan dua model: mempertaha
 
 | Tanggal | Tool AI | Prompt yang diberikan | Ringkasan saran/ide AI | Bagaimana diolah jadi tulisan/kode sendiri |
 |---|---|---|---|---|
-| ... | ... | ... | ... | ... |
+| 10-11-2026 | Claude(chat) | gimana konsep dasar mensimulasikan jeda replikasi asinkron antar dua objek Python. buat penjelasaan simpel tapi jangan oversimplyfie | AI nya jelasin kalau konsep penggunaan jeda waktu (delay/sleep) atau antrian sebelum memperbarui variabeel state di objek replika kedua agar kode bisa bekerja sesuai dengan ketentuan di sola. | menjadikan saran dari ai sebagai pertimbangan untuk mengerjakan kode dan menyesuaikan dengan konteks soal |
