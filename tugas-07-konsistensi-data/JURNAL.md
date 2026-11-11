@@ -41,7 +41,6 @@ Kami menyimpulkan solusi yang tepat adalah mengombinasikan dua model: mempertaha
 
         Bandung-->>Bandung: Replikasi tiba terlambat, saldo baru ter-update
     ```
-    ![alt text](Img/image.png)
 
     2. Skenario dengan Solusi Read-Your-Writes (Bug Teratasi):
     ```mermaid
@@ -75,7 +74,6 @@ Kami menyimpulkan solusi yang tepat adalah mengombinasikan dua model: mempertaha
         Bandung-->>Pelanggan: Transaksi berhasil diproses
         deactivate Bandung
     ```
-    ![alt text](Img/image-1.png)
 ## Simulasi (jika dikerjakan)
 - Hasil skenario naif vs Read-Your-Writes: ...
 
