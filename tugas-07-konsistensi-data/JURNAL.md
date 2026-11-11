@@ -75,7 +75,10 @@ Kami menyimpulkan solusi yang tepat adalah mengombinasikan dua model: mempertaha
         deactivate Bandung
     ```
 ## Simulasi (jika dikerjakan)
-- Hasil skenario naif vs Read-Your-Writes: ...
+- Hasil skenario naif vs Read-Your-Writes:
+  Pada pengujian kode di `src/replica_simulation.py`, terlihat perbedaan yang jelas antara kedua skenario:
+  - Pada skenario naif, setelah pelanggan top-up Rp50.000 di server Jakarta, proses replikasi ke Bandung diberi jeda delay 2 detik. Saat pelanggan membaca saldo lewat server Bandung 0.5 detik kemudian, saldo yang terbaca masih `0.0`. Ini membuktikan terjadinya *stale read*, di mana saldo belum sempat tersinkronisasi ke Bandung sehingga pesanan makanan akan langsung ditolak padahal saldo sebenarnya sudah masuk di Jakarta.
+  - Pada skenario Read-Your-Writes, pelanggan melakukan top-up tambahan Rp20.000 (total saldo Rp70.000, versi 2). Aplikasi pelanggan membawa informasi versi mutasi terakhir (`versi_minimal = 2`). Ketika pelanggan membaca saldo ke server Bandung yang datanya masih versi 1, sistem mendeteksi versi lokal belum cukup dan langsung mengalihkan (*redirect*) pembacaan ke server Jakarta. Hasil saldo yang terbaca langsung `70000.0` secara konsisten tanpa perlu menunggu proses replikasi 2 detik selesai.
 
 ## Log Penggunaan AI (Level 2)
 
