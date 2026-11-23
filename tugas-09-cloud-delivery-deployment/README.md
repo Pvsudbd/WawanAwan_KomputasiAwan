@@ -14,6 +14,14 @@ Pemerintah ingin membangun **Sistem Data Kependudukan** (nama, NIK, alamat, data
 ## Tugas Kelompok
 
 1. **Rekomendasikan Deployment Model** (Public / Private / Hybrid / Community Cloud) yang paling tepat untuk sistem ini. Jelaskan alasannya berdasarkan **karakteristik NIST** (on-demand self-service, broad network access, resource pooling, rapid elasticity, measured service) dikaitkan dengan kebutuhan kerahasiaan vs skalabilitas.
+
+Deployment model yang dipilih kelompok kami adalah Hybrid Cloud, gabungan antara public dan private cloud <br>
+Penjelasan per karakteristik NIST sebagai berikut : <br>
+A. Resource pooling Data sensitif ditempatkan pada resource pool, private cloud, sehingga Negara memegang kendali penuh terhadap hypervisor, penyimpanan fisik, dan kunci enkripsi sesuai UU No. 27 Tahun 2022 tentang perlindungan data pribadi<br>
+B. Rapid elasticity saat permintaan melonjak drastis, segmen public cloud melakukan auto-scaling secara instan tanpa memaksa pembelian hardware tambahan sementara<br>
+C. Broad network access validasi layanan melalui berbagai jaringan tanpa harus menarik jalur fisik ke setiap titik<br>
+D. On demand self service memproses node tambahan atau provisioning kuota API melalui portal mandiri saat ada kegiatan massal<br>
+E. Measured service untuk pemanggilan API verifikasi dan mekanisme audit trail keamanan data<br>
 2. **Rekomendasikan Service Model** (IaaS / PaaS / SaaS) yang tepat untuk komponen-komponen berbeda dari sistem ini (boleh berbeda service model untuk komponen berbeda, mis. database inti vs portal publik untuk pengecekan status).
 3. Jelaskan **minimal 2 risiko spesifik** dari pilihan kalian dan mitigasinya (mis. jika Hybrid Cloud dipilih: risiko sinkronisasi data antara private & public segment).
 4. Bandingkan singkat dengan **satu alternatif yang kalian tolak** — kenapa alternatif itu kurang tepat (mis. kenapa Public Cloud murni ditolak, atau kenapa Private Cloud murni dianggap kurang skalabel).
