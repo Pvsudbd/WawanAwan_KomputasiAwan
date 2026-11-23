@@ -6,6 +6,17 @@ Repositori ini berisi seluruh tugas mata kuliah **Sistem Terdistribusi & Komputa
 2. **Kerja kelompok, tanggung jawab jelas.** Tiap tugas dikerjakan berkelompok (3–4 orang), dengan pembagian peran yang tercatat lewat commit history GitHub masing-masing anggota (bukan cuma commit dari satu orang).
 3. **Penggunaan AI dibatasi di Level 2 (AI Assisted Idea Generation & Structuring)**, mengikuti kerangka 5-Level Penggunaan AI Telkom University. AI **boleh** dipakai untuk brainstorming ide awal atau membantu menyusun outline/struktur — **tidak boleh** dipakai untuk menghasilkan isi akhir (kode, analisis, diagram, teks README) yang tinggal disalin. Setiap tugas mewajibkan dokumentasi proses berpikir (*thought process*) dan log penggunaan AI (jika ada) sebagai verifikasi. Detail lengkap ada di [`RUBRIK-UMUM.md`](RUBRIK-UMUM.md).
 
+# Kelompok lama
+
+- 1. Yoga Perkasa Didik (103072400106) 
+- 2. Muhammad Kafi Rijal (103072400016) 
+- 3. Valen Jonathan Miceliano Pasaribu (103072400072)
+
+# Kelompok Baru
+- 1. Yoga Perkasa Didik (103072400106) 
+- 2. Muhammad Kafi Rijal (103072400016)
+  3. Bertrand Lianto (103072400019)
+
 **Mulai dari sini:** baca [`HANDBOOK.md`](HANDBOOK.md) — panduan lengkap cara fork, setup laptop (Git, Docker, Python), alur commit per kelompok, sampai cara submit tiap tugas.
 
 ## Struktur Repositori
