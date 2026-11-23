@@ -20,8 +20,13 @@ services:
       - PORT=8000
 
   # TODO: jika kalian melakukan simulasi scale-up (langkah 5 di README),
-  # tambahkan service "app4" di sini dengan pola yang sama, lalu tambahkan
-  # "server app4:8000;" ke upstream block di nginx/nginx.conf.
+  # uncomment service "app4" di bawah ini, tambahkan juga ke depends_on nginx,
+  # lalu uncomment "server app4:8000;" ke upstream block di nginx/nginx.conf.
+  # app4:
+  #   build: ./app
+  #   environment:
+  #     - INSTANCE_ID=app4
+  #     - PORT=8000
 
   nginx:
     image: nginx:alpine

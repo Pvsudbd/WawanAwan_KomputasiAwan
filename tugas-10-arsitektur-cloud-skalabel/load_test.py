@@ -27,10 +27,11 @@ def kirim_request():
         with urllib.request.urlopen(TARGET_URL, timeout=5) as resp:
             body = resp.read().decode()
             # TODO 2: ekstrak instance_id dari `body` sesuai format response
-            # yang kalian buat di app.py, lalu:
-            # with lock:
-            #     hasil[instance_id] += 1
-            pass
+            # yang kalian buat di app.py, lalu update hasil dengan lock
+            body_clean = body.strip()
+            instance_id = body_clean.split(":")[-1].strip() if ":" in body_clean else body_clean
+            with lock:
+                hasil[instance_id] += 1
     except Exception as e:
         with lock:
             hasil["ERROR"] += 1
@@ -47,6 +48,9 @@ def main():
         t.start()
         # TODO 3: batasi jumlah thread aktif bersamaan sesuai CONCURRENCY
         # (mis. dengan semaphore, atau proses batch per CONCURRENCY thread).
+        if len(threads) % CONCURRENCY == 0:
+            for t_batch in threads[-CONCURRENCY:]:
+                t_batch.join()
 
     for t in threads:
         t.join()
