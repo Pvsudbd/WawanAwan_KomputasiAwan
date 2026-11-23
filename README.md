@@ -15,7 +15,7 @@ Repositori ini berisi seluruh tugas mata kuliah **Sistem Terdistribusi & Komputa
 # Kelompok Baru
 - 1. Yoga Perkasa Didik (103072400106) 
 - 2. Muhammad Kafi Rijal (103072400016)
-  3. Bertrand Lianto (103072400019)
+- 3. Bertrand Lianto (103072400019)
 
 **Mulai dari sini:** baca [`HANDBOOK.md`](HANDBOOK.md) — panduan lengkap cara fork, setup laptop (Git, Docker, Python), alur commit per kelompok, sampai cara submit tiap tugas.
 
