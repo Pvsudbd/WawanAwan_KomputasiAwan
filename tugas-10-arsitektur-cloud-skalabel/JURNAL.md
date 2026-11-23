@@ -3,8 +3,7 @@
 ## Setup Nginx & multi-instance
 - Kendala saat konfigurasi upstream:
   - Saat kami mengonfigurasi `upstream` di Nginx, kami harus mendefinisikan nama service backend (`app1:8000`, `app2:8000`, `app3:8000`) agar terhubung dalam satu network Docker Compose. Kami juga memastikan mapping port luar 8080 di Nginx diteruskan ke port 8000 di masing-masing backend.
-  - Bukti container berhasil kami jalankan (`docker compose ps`): [`bukti/DockComp.png`](bukti/DockComp.png)
-  - Bukti uji coba konektivitas manual yang kami lakukan via curl: [`bukti/BuktiCurl.png`](bukti/BuktiCurl.png)
+  
 - **Eksperimen Failover (Simulasi Instance Dimatikan)**:
   - Ketika `app2` kami matikan secara sengaja menggunakan perintah `docker compose stop app2`, kami langsung menjalankan `load_test.py` untuk mengamati bagaimana reaksi Nginx.
   - **Hasil yang kami dapatkan**: Dari 300 request, `app3` menangani 141 request, `app1` menangani 139 request, dan muncul **20 request ERROR** dengan durasi total yang membengkak menjadi **16.06 detik**.
@@ -34,7 +33,7 @@
   - **Hasil yang kami amati**: Seluruh 300 request ditangani oleh satu instance (`app_single_vertical: 300 request`) dan selesai dalam waktu **1.92 detik** tanpa error.
   - **Hasil diskusi dan perbandingan kelompok kami**:
     - **Dari segi latensi lokal**: Di pengujian skala kecil laptop kami, 1 instance besar memang terasa sedikit lebih cepat (1.92 detik vs 3.81 detik) karena request langsung masuk ke aplikasi tanpa harus melewati proses *proxy passing* dari Nginx.
-    - **Dari segi ketahanan (kasus TicketGo)**: Walaupun cepat di beban rendah, kelompok kami menyimpulkan bahwa 1 instance besar sangat berbahaya karena memiliki **Single Point of Failure (SPOF)**. Kalau ada lonjakan 1 juta user mendadak seperti di kasus TicketGo dan server kehabisan CPU/RAM, satu-satunya server itu akan langsung mati dan layanan lumpuh total. Berbeda dengan Horizontal Scaling yang kami uji di atas, sistem punya sifat *fault tolerance*—meskipun satu server mati, Load Balancer tetap bisa membagi beban ke server lain yang masih hidup.
+    - **Dari segi ketahanan (kasus TicketGo)**: Walaupun cepat di beban rendah, kelompok kami menyimpulkan bahwa 1 instance besar sangat berbahaya karena memiliki **Single Point of Failure (SPOF)**. Kalau ada lonjakan 1 juta user mendadak seperti di kasus TicketGo dan server kehabisan CPU/RAM, satu-satunya server itu akan langsung mati dan layanan lumpuh total. Berbeda dengan Horizontal Scaling yang kami uji di atas, sistem punya sifat *fault tolerance*, meskipun satu server mati, Load Balancer tetap bisa membagi beban ke server lain yang masih hidup.
   - Bukti pengujian vertical scaling kami: [`bukti/Vert_scaling.png`](bukti/Vert_scaling.png)
 
 ## Log Penggunaan AI (Level 2)
