@@ -1,6 +1,13 @@
 # Jurnal Proses — Tugas 9
 
 ## Diskusi deployment model
+Deployment model yang dipilih kelompok kami adalah Hybrid Cloud, gabungan antara public dan private cloud <br>
+Penjelasan per karakteristik NIST sebagai berikut : <br>
+A. Resource pooling Data sensitif ditempatkan pada resource pool, private cloud, sehingga Negara memegang kendali penuh terhadap hypervisor, penyimpanan fisik, dan kunci enkripsi sesuai UU No. 27 Tahun 2022 tentang perlindungan data pribadi<br>
+B. Rapid elasticity saat permintaan melonjak drastis, segmen public cloud melakukan auto-scaling secara instan tanpa memaksa pembelian hardware tambahan sementara<br>
+C. Broad network access validasi layanan melalui berbagai jaringan tanpa harus menarik jalur fisik ke setiap titik<br>
+D. On demand self service memproses node tambahan atau provisioning kuota API melalui portal mandiri saat ada kegiatan massal<br>
+E. Measured service untuk pemanggilan API verifikasi dan mekanisme audit trail keamanan data<br>
 - Opsi yang dipertimbangkan dan kenapa akhirnya memilih salah satu: ...
 
 ## Diskusi service model per komponen
