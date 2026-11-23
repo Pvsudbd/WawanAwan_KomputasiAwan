@@ -11,7 +11,9 @@ E. Measured service untuk pemanggilan API verifikasi dan mekanisme audit trail k
 - Opsi yang dipertimbangkan dan kenapa akhirnya memilih salah satu: ...
 
 ## Diskusi service model per komponen
-- ...
+- Pada Database kami sepakat untuk wajib IaaS di private negara dikarenakan kita harus memiliki kontrol penuh pada data masyarakat sampai di level konfigurasi OS
+- Untuk API Gateway, Cache itu kami memliki PaaS karena kita tidak perlu untuk mengurus Virtual Machine satu per satu
+- Untuk Portal Layanan Warga & Dashboard petugas itu mengunakan SaaS karena pada user tidak perlu tahu konfigurasi server di belakangnya
 
 ## Log Penggunaan AI (Level 2)
 
