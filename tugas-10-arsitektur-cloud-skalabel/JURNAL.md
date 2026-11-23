@@ -36,6 +36,17 @@
     - **Dari segi ketahanan (kasus TicketGo)**: Walaupun cepat di beban rendah, kelompok kami menyimpulkan bahwa 1 instance besar sangat berbahaya karena memiliki **Single Point of Failure (SPOF)**. Kalau ada lonjakan 1 juta user mendadak seperti di kasus TicketGo dan server kehabisan CPU/RAM, satu-satunya server itu akan langsung mati dan layanan lumpuh total. Berbeda dengan Horizontal Scaling yang kami uji di atas, sistem punya sifat *fault tolerance*, meskipun satu server mati, Load Balancer tetap bisa membagi beban ke server lain yang masih hidup.
   - Bukti pengujian vertical scaling kami: [`bukti/Vert_scaling.png`](bukti/Vert_scaling.png)
 
+## Keterbatasan Simulasi vs Auto-Scaling Cloud Nyata
+- **Keterbatasan Simulasi:**
+  - Masih serba manual: menambah instance harus mengedit `docker-compose.yml` dan `nginx.conf` lalu restart container.
+  - Tidak sanggup merespons lonjakan mendadak karena server keburu tumbang sebelum admin sempat melakukan scaling manual.
+  - Tidak ada mekanisme scale-down otomatis saat sepi, sehingga berisiko memboroskan biaya/resource.
+- **Komponen agar Menjadi Otomatis (seperti Cloud Asli):**
+  1. *Metric Collector* (misal CloudWatch / Prometheus): memantau CPU, RAM, dan request per detik secara real-time.
+  2. *Auto-Scaler Controller & Scaling Policy* (misal AWS ASG / Kubernetes HPA): otomatis memicu penambahan/pengurangan instance berdasarkan ambang batas (*threshold*).
+  3. *Dynamic Discovery & Health Check*: mendaftarkan IP instance baru ke Load Balancer secara otomatis dan memastikan server sehat (`HTTP 200`) sebelum dialiri trafik.
+  4. *Connection Draining*: memberi jeda waktu agar request yang sedang diproses selesai terlebih dahulu sebelum instance dimatikan saat scale-down.
+
 ## Log Penggunaan AI (Level 2)
 
 > Wajib diisi sesuai kebijakan Level 2 di [`../RUBRIK-UMUM.md`](../RUBRIK-UMUM.md). Tulis "Tidak memakai AI" pada baris pertama jika memang tidak dipakai. Hanya untuk brainstorming ide/outline — bukan untuk kode/analisis/teks akhir.
